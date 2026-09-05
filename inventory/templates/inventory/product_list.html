@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory Management</title>
+</head>
+<body>
+
+    <h1>Inventory Management System</h1>
+
+    <h2>Products</h2>
+    <a href="/products/add/">Add Product</a>
+
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>SKU</th>
+            <th>Price</th>
+            <th>Stock</th>
+        </tr>
+
+        {% for product in products %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.sku }}</td>
+            <td>₹{{ product.price }}</td>
+            <td>{{ product.stock_quantity }}</td>
+            <td>
+                <a href="/products/edit/{{ product.id }}/">Edit</a>
+            </td>
+            <td>
+                <a href="/products/delete/{{ product.id }}/">Delete</a>
+            </td>
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="4">No products available.</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+</html>
