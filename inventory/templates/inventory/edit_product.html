@@ -1,8 +1,10 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
     <title>Edit Product</title>
 </head>
+
 <body>
 
     <h1>Edit Product</h1>
@@ -17,6 +19,18 @@
 
         <label>SKU:</label>
         <input type="text" name="sku" value="{{ product.sku }}">
+
+        <br><br>
+
+        <label>Category:</label>
+        <select name="category">
+            {% for category in categories %}
+                <option value="{{ category.id }}"
+                    {% if product.category_id == category.id %}selected{% endif %}>
+                    {{ category.name }}
+                </option>
+            {% endfor %}
+        </select>
 
         <br><br>
 
@@ -41,3 +55,4 @@
 
 </body>
 </html>
+```

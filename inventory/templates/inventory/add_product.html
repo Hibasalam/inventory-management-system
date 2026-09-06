@@ -18,7 +18,20 @@
         <label>SKU:</label>
         <input type="text" name="sku">
 
+
         <br><br>
+
+        <label>Category:</label>
+        <select name="category">
+           {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+
+
+
+        <br><br>
+
 
         <label>Price:</label>
         <input type="number" name="price">
