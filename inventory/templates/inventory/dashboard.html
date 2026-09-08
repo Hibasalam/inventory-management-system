@@ -1,24 +1,50 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Inventory Dashboard</title>
+    <link rel="stylesheet" href="{% static 'inventory/style.css' %}">
 </head>
 
 <body>
 
+<nav>
+    <a href="/">Dashboard</a>
+    <a href="/products/">Products</a>
+    <a href="/admin/">Admin</a>
+    <a href="/logout/">Logout</a>
+</nav>
+
+<div class="container">
+
     <h1>Inventory Dashboard</h1>
 
-    <h2>Total Products: {{ total_products }}</h2>
+    <div class="card-container">
 
-    <h2>Total Categories: {{ total_categories }}</h2>
+        <div class="card">
+            <h2>{{ total_products }}</h2>
+            <p>Total Products</p>
+        </div>
 
-    <h2>Total Suppliers: {{ total_suppliers }}</h2>
+        <div class="card">
+            <h2>{{ total_categories }}</h2>
+            <p>Total Categories</p>
+        </div>
 
-    <h2>Low Stock Products: {{ low_stock_products }}</h2>
+        <div class="card">
+            <h2>{{ total_suppliers }}</h2>
+            <p>Total Suppliers</p>
+        </div>
 
-    <br>
+        <div class="card">
+            <h2>{{ low_stock_products }}</h2>
+            <p>Low Stock Products</p>
+        </div>
 
-    <a href="/products/">View Products</a>
+    </div>
 
-</body>
+</div>
+
+</body>         
 </html>

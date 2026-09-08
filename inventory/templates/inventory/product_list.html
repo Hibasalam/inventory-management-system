@@ -1,14 +1,17 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Inventory Management</title>
+    <title>Products</title>
+    <link rel="stylesheet" href="{% static 'inventory/style.css' %}">
 </head>
 <body>
 
     <h1>Inventory Management System</h1>
 
     <h2>Products</h2>
-    <a href="/products/add/">Add Product</a>
+    <a href="{% url 'add_product' %}">Add Product</a>
 
     <table border="1">
         <tr>
@@ -34,10 +37,11 @@
             </td>
             
             <td>
-                <a href="/products/edit/{{ product.id }}/">Edit</a>
+                <a href="{% url 'edit_product' product.id %}">Edit</a>
+
             </td>
             <td>
-                <a href="/products/delete/{{ product.id }}/">Delete</a>
+                <a href="{% url 'delete_product' product.id %}">Delete</a>
             </td>
         </tr>
 
