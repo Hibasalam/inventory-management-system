@@ -4,6 +4,9 @@ from django.shortcuts import render,redirect
 from django.db import models
 from django.contrib.auth import authenticate, login
 from .models import Product,Category, Supplier, Purchase, Sale
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from .serializers import ProductSerializer
 
 def product_list(request):
     products = Product.objects.all()
@@ -115,3 +118,45 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('login')
+
+
+
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+def product_api(request, id=None):
+
+    if request.method == 'GET':
+        products = Product.objects.all()
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
+
+    if request.method == 'POST':
+        serializer = ProductSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+        return Response(serializer.errors)
+
+    if request.method == 'PUT':
+        product = Product.objects.get(id=id)
+
+        serializer = ProductSerializer(
+            product,
+            data=request.data
+        )
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+        return Response(serializer.errors)
+
+
+    if request.method == 'DELETE':
+        product = Product.objects.get(id=id)
+        product.delete()
+
+        return Response({
+            'message': 'Product deleted successfully'
+         })
